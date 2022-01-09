@@ -11,6 +11,7 @@ import {
   VerifyCode,
   VerifyCodeSchema,
 } from "src/user/schema/verify-code.schema";
+import { Card, CardSchema } from "src/card/schema/card.schema";
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import {
     MongooseModule.forFeature([
       { name: User.name, schema: UserSchema },
       { name: VerifyCode.name, schema: VerifyCodeSchema },
+      { name: Card.name, schema: CardSchema },
     ]),
     MailerModule.forRoot({
       transport: {

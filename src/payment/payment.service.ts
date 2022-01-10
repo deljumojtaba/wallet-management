@@ -9,8 +9,6 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { PaginationDto } from "src/tools/dtos/pagination-query.dto";
 import { Messages } from "src/tools/messages";
-import mongoose from "mongoose";
-import { isIdValid, toObjectId } from "src/tools/utils";
 import { Request } from "express";
 import { User } from "src/user/schema/user.schema";
 import { ChargeWalletDto } from "./dto/charge-wallet.dto";
@@ -130,7 +128,9 @@ export class PaymentService {
             pay.save();
             // if payment is failed
             console.log(result);
-            reject(new InternalServerErrorException(result.errorMessage));
+            return reject(
+              new InternalServerErrorException(result.errorMessage)
+            );
           }
           pay.paymentId = result.paymentId;
           pay.conversationId = result.conversationId;
@@ -140,7 +140,7 @@ export class PaymentService {
         if (err) {
           pay.save();
           console.log(err); // error
-          reject(new InternalServerErrorException(err));
+          return reject(new InternalServerErrorException(err));
         }
       });
     });
@@ -149,9 +149,14 @@ export class PaymentService {
     // save payment to db
     // and update user wallet
     let item = await this.payModel.findOne({
-      user: user._id,
+      user: userId,
       status: "pending",
     });
+
+    if (!item) {
+      throw new ConflictException(Messages.USER_NOT_FOUND);
+    }
+
     const verify = await new Promise<object>(function (resolve, reject) {
       iyzipay.payment.retrieve(
         {

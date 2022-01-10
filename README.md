@@ -70,7 +70,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## License
 ## .env 
-<!-- IP=http://localhost:3003/api
+IP=http://localhost:3003/api
 PORT=3003
 DB_URI=mongodb://localhost:27017/wallet-management
 MONGODB_USERNAME=mojtaba
@@ -78,6 +78,6 @@ MONGODB_PASSWORD=secret
 NODE_ENV=development
 TOKEN_SECRET=@$wallet$_SECERT_TOKEN_$@
 JWT_EXPIRATION=31540000s
-ENCRYPT_JWT_SECRET=1qaz@WSX -->
+ENCRYPT_JWT_SECRET=1qaz@WSX 
 
 Nest is [MIT licensed](LICENSE).

@@ -6,6 +6,8 @@ import { AuthModule } from "./auth/auth.module";
 import { configuration } from "./config/configuration";
 import { UserModule } from "./user/user.module";
 import { validationSchema } from "./config/validation";
+import { CardModule } from './card/card.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { validationSchema } from "./config/validation";
     MongooseModule.forRoot(process.env.DB_URI),
     AuthModule,
     UserModule,
+    CardModule,
+    PaymentModule,
   ],
   providers: [],
 })

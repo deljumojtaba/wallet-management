@@ -26,6 +26,7 @@ import {
 import { MailerService } from "@nestjs-modules/mailer";
 import { VerifyCode } from "src/user/schema/verify-code.schema";
 import { mailer } from "src/tools/mailer";
+import { Card } from "src/card/schema/card.schema";
 
 @Injectable()
 export class AuthService {
@@ -33,6 +34,8 @@ export class AuthService {
   constructor(
     @InjectModel(User.name) private userModel: Model<User>,
     @InjectModel(VerifyCode.name) private verifyCodeModel: Model<VerifyCode>,
+    @InjectModel(Card.name) private cardModel: Model<Card>,
+
     private readonly mailerService: MailerService
   ) {
     this.cryptr = new Cryptr(process.env.ENCRYPT_JWT_SECRET);
@@ -102,6 +105,11 @@ export class AuthService {
     if (!user) {
       throw new InternalServerErrorException(Messages.PPD_FAILURE);
     }
+
+    const cards = await new this.cardModel({
+      user: user._id,
+      cards: [],
+    }).save();
 
     const item = {
       email: user.email,

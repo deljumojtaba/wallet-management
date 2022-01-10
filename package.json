@@ -41,6 +41,7 @@
     "crypter": "^0.2.2",
     "cryptr": "^6.0.2",
     "formidable": "^2.0.0-canary.20200504.1",
+    "iyzipay": "^2.0.48",
     "joi": "^17.4.2",
     "mongoose": "^6.0.8",
     "multer": "^1.4.3",

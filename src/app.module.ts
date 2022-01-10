@@ -7,6 +7,7 @@ import { configuration } from "./config/configuration";
 import { UserModule } from "./user/user.module";
 import { validationSchema } from "./config/validation";
 import { CardModule } from './card/card.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { CardModule } from './card/card.module';
     AuthModule,
     UserModule,
     CardModule,
+    PaymentModule,
   ],
   providers: [],
 })
